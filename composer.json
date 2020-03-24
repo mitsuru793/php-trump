@@ -24,13 +24,13 @@
     },
     "autoload": {
         "psr-4": {
-            "trump\\": "src/"
+            "Trump\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Helper\\": "tests/Helper",
-            "trump\\": "tests/"
+            "Trump\\": "tests/"
         }
     }
 }
