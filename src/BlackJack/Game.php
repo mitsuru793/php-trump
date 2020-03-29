@@ -10,6 +10,8 @@ final class Game
 {
     use HasPlayerActions;
 
+    use HasCardActions;
+
     private Dealer $dealer;
 
     /** @var Player[] */
@@ -27,27 +29,12 @@ final class Game
         $this->render = new Renderer($this->dealer, $this->players, $this->deck);
     }
 
-    private function shuffle(Deck $deck): Deck
-    {
-        $cards = $deck->cards();
-        shuffle($cards);
-        return new Deck($cards);
-    }
-
     public function run(): void
     {
         $this->passFirstCard();
+        echo $this->render->renderGame();
+
         $this->cycle();
-    }
-
-    private function passFirstCard(): void
-    {
-        foreach ($this->players as $player) {
-            $card = $this->deck->draw();
-            $player->addCard($card);
-
-            echo $this->render->renderGame();
-        }
     }
 
     private function cycle(): void
