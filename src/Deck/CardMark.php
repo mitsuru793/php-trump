@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump;
+namespace Trump\Deck;
+
+use Trump\Enum;
 
 /**
  * @method static self HEART()

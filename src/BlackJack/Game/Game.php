@@ -7,7 +7,7 @@ use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayerActionResult;
 use Trump\BlackJack\Renderer;
-use Trump\Deck;
+use Trump\Deck\Deck;
 use Trump\Stream\OutputInterface;
 
 final class Game

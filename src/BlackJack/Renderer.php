@@ -6,8 +6,8 @@ namespace Trump\BlackJack;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Playable;
 use Trump\BlackJack\Playable\Player;
-use Trump\Card;
-use Trump\Deck;
+use Trump\Deck\Card;
+use Trump\Deck\Deck;
 
 final class Renderer
 {

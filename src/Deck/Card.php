@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump;
+namespace Trump\Deck;
 
 final class Card
 {
