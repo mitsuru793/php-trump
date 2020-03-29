@@ -55,19 +55,19 @@ class DeckTest extends TestBase
     public function testDraw()
     {
         $cards = [
-            new Card(CardMark::hart(), CardNumber::of(1)),
-            new Card(CardMark::spade(), CardNumber::of(2)),
+            new Card(CardMark::HEART(), CardNumber::of(1)),
+            new Card(CardMark::SPADE(), CardNumber::of(2)),
         ];
         $deck = new Deck($cards);
 
         $drawn = $deck->draw();
         $this->assertObjectEquals(CardNumber::of(1), $drawn->number());
-        $this->assertObjectEquals(CardMark::hart(), $drawn->mark());
+        $this->assertObjectEquals(CardMark::HEART(), $drawn->mark());
         $this->assertCount(1, $deck);
 
         $drawn = $deck->draw();
         $this->assertObjectEquals(CardNumber::of(2), $drawn->number());
-        $this->assertObjectEquals(CardMark::spade(), $drawn->mark());
+        $this->assertObjectEquals(CardMark::SPADE(), $drawn->mark());
         $this->assertCount(0, $deck);
 
         $this->expectException(\BadMethodCallException::class);

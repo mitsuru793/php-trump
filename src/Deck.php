@@ -19,7 +19,7 @@ final class Deck implements \Countable
     public static function create(): self
     {
         $cards = [];
-        foreach (CardMark::all() as $mark) {
+        foreach (CardMark::values() as $mark) {
             foreach (CardNumber::all() as $number) {
                 $cards[] = new Card($mark, $number);
             }
