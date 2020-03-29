@@ -39,4 +39,14 @@ abstract class Enum extends \MyCLabs\Enum\Enum
 
         throw new \BadMethodCallException("No static method or enum constant '$calledMethod' in class " . static::class);
     }
+
+    /**
+     * @param int|string $value
+     *
+     * @return static
+     */
+    public static function of($value)
+    {
+        return new static($value);
+    }
 }
