@@ -8,12 +8,15 @@ use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayerActionResult;
 use Trump\BlackJack\Renderer;
 use Trump\Deck;
+use Trump\Stream\OutputInterface;
 
 final class Game
 {
     use HasPlayerActions;
 
     use HasCardActions;
+
+    private OutputInterface $output;
 
     private Dealer $dealer;
 
@@ -24,8 +27,9 @@ final class Game
 
     private Renderer $render;
 
-    public function __construct(Dealer $dealer, array $players)
+    public function __construct(OutputInterface $output, Dealer $dealer, array $players)
     {
+        $this->output = $output;
         $this->dealer = $dealer;
         $this->players = $players;
         $this->deck = $this->shuffle(Deck::create());
@@ -35,7 +39,7 @@ final class Game
     public function run(): void
     {
         $this->passFirstCard();
-        echo $this->render->renderGame();
+        $this->output->write($this->render->renderGame());
 
         $this->cycle();
     }
@@ -58,8 +62,10 @@ final class Game
                 $messages = ['Dealer won.'];
             }
 
-            echo $this->render->info($messages);
-            echo $this->render->renderGame();
+            $this->output->write([
+                $this->render->info($messages),
+                $this->render->renderGame(),
+            ]);
         }
     }
 
@@ -70,13 +76,17 @@ final class Game
                 try {
                     $action = $this->askAction($player);
                 } catch (\UnexpectedValueException $e) {
-                    echo $this->render->error($e->getMessage());
+                    $this->output->write(
+                        $this->render->error($e->getMessage())
+                    );
                     continue;
                 }
 
                 if ($action->isHit()) {
                     $this->hit($player);
-                    echo $this->render->renderGame();
+                    $this->output->write(
+                        $this->render->renderGame()
+                    );
                     continue;
                 }
 

@@ -5,14 +5,18 @@ declare(strict_types=1);
 use Trump\BlackJack\Game\Game;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
+use Trump\Stream\StdOutput;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
+$output = new StdOutput();
 
 $dealer = new Dealer('Claire');
 $players = [
     new Player('Mike'),
     new Player('Jane'),
 ];
-$game = new Game($dealer, $players);
+
+$game = new Game($output, $dealer, $players);
 $game->run();
 
