@@ -28,9 +28,6 @@ final class Renderer
         $this->deck = $deck;
     }
 
-    /**
-     * @param Player[] $players
-     */
     public function renderGame(): string
     {
         return $this->line()
