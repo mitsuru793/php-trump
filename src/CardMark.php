@@ -20,11 +20,6 @@ final class CardMark
         $this->value = $value;
     }
 
-    public function __toString(): string
-    {
-        return $this->value;
-    }
-
     /**
      * @return self[]
      */
@@ -56,6 +51,11 @@ final class CardMark
     public static function diamond(): self
     {
         return new self(self::DIAMOND);
+    }
+
+    public function __toString(): string
+    {
+        return $this->value;
     }
 
     public function value(): string

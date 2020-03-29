@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Trump;
 
+use InvalidArgumentException;
+
 final class CardNumber
 {
     private int $value;
@@ -11,7 +13,7 @@ final class CardNumber
     {
         if ($value < 1 || 13 < $value) {
             $err = sprintf('Card number must be between 1 and 13, but %d.', $value);
-            throw new \InvalidArgumentException($err);
+            throw new InvalidArgumentException($err);
         }
         $this->value = $value;
     }
