@@ -40,10 +40,20 @@ final class Renderer
             . $this->puts("! $message !");
     }
 
-    public function info(string $message): string
+    /**
+     * @param string|string[] $messages
+     */
+    public function info($messages): string
     {
-        return $this->line()
-            . $this->puts("> $message <");
+        if (!is_array($messages)) {
+            $messages = [$messages];
+        }
+
+        $str = $this->line();
+        foreach ($messages as $message) {
+            $str .= $this->puts("> $message <");
+        }
+        return $str;
     }
 
     private function line(): string

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Trump\BlackJack;
 
-use BadMethodCallException;
 use Trump\Deck;
 
 final class Game
@@ -40,11 +39,27 @@ final class Game
     private function cycle(): void
     {
         foreach ($this->players as $player) {
-            $this->playerTurn($player);
+            $messages = null;
+
+            $result = $this->playerTurn($player);
+            if ($result->isBust()) {
+                $e = new BustException($player);
+                $messages = [
+                    $e->getMessage(),
+                    'Dealer won.',
+                ];
+            } elseif ($result->didWin()) {
+                $messages = [sprintf('Player %s won.', $player->name())];
+            } else {
+                $messages = ['Dealer won.'];
+            }
+
+            echo $this->render->info($messages);
+            echo $this->render->renderGame();
         }
     }
 
-    private function playerTurn(Player $player): void
+    private function playerTurn(Player $player): PlayerActionResult
     {
         try {
             while (true) {
@@ -64,20 +79,14 @@ final class Game
                 if ($action->isStand()) {
                     $playerWin = $this->stand($player);
                     if ($playerWin) {
-                        $msg = sprintf('Player %s won.', $player->name());
-                    } else {
-                        $msg = 'Dealer won.';
+                        return PlayerActionResult::won();
                     }
-                    echo $this->render->info($msg);
-                    echo $this->render->renderGame();
-                    break;
+                    return PlayerActionResult::lostByStand();
                 }
 
             }
         } catch (BustException $e) {
-            echo $this->render->info($e->getMessage());
-            echo $this->render->info('Dealer won.');
-            echo $this->render->renderGame();
+            return PlayerActionResult::bust();
         }
     }
 }
