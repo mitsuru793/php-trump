@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Trump\BlackJack;
 
 use BadMethodCallException;
+use Trump\BlackJack\Playable\Player;
 
 /**
  * @mixin Game

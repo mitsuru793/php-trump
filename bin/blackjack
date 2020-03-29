@@ -2,9 +2,9 @@
 <?php
 declare(strict_types=1);
 
-use Trump\BlackJack\Dealer;
 use Trump\BlackJack\Game;
-use Trump\BlackJack\Player;
+use Trump\BlackJack\Playable\Dealer;
+use Trump\BlackJack\Playable\Player;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

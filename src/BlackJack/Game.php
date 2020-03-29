@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Trump\BlackJack;
 
+use Trump\BlackJack\Playable\Dealer;
+use Trump\BlackJack\Playable\Player;
 use Trump\Deck;
 
 final class Game

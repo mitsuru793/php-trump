@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack;
+namespace Trump\BlackJack\Playable;
 
-final class Player implements Playable
+final class Dealer implements Playable
 {
     use HasPlayable;
 
     public function isDealer(): bool
     {
-        return false;
+        return true;
     }
 }
