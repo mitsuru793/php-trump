@@ -2,7 +2,7 @@
 <?php
 declare(strict_types=1);
 
-use Trump\BlackJack\Game;
+use Trump\BlackJack\Game\Game;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 

@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack;
+namespace Trump\BlackJack\Game;
 
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
+use Trump\BlackJack\PlayerActionResult;
+use Trump\BlackJack\Renderer;
 use Trump\Deck;
 
 final class Game
