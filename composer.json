@@ -13,7 +13,7 @@
     "require": {
         "ext-readline": "*",
         "tightenco/collect": "^6.5",
-        "symfony/console": "^4.2",
+        "symfony/console": "^5.0",
         "myclabs/php-enum": "^1.7"
     },
     "require-dev": {
