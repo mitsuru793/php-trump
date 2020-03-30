@@ -10,13 +10,6 @@ use Trump\Deck\Deck;
  */
 trait HasCardActions
 {
-    private function shuffle(Deck $deck): Deck
-    {
-        $cards = $deck->cards();
-        shuffle($cards);
-        return new Deck($cards);
-    }
-
     private function passFirstCard(): void
     {
         foreach ($this->players as $player) {

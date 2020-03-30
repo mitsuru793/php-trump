@@ -27,12 +27,12 @@ final class Game
 
     private Renderer $render;
 
-    public function __construct(OutputInterface $output, Dealer $dealer, array $players)
+    public function __construct(OutputInterface $output, Dealer $dealer, array $players, Deck $deck)
     {
         $this->output = $output;
         $this->dealer = $dealer;
         $this->players = $players;
-        $this->deck = $this->shuffle(Deck::create());
+        $this->deck = $deck;
         $this->render = new Renderer($this->dealer, $this->players, $this->deck);
     }
 
@@ -97,7 +97,6 @@ final class Game
                     }
                     return PlayerActionResult::lostByStand();
                 }
-
             }
         } catch (BustException $e) {
             return PlayerActionResult::bust();
