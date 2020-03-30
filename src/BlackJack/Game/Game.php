@@ -47,8 +47,6 @@ final class Game
     public function run(): void
     {
         $this->passFirstCard();
-        $this->render->renderGame();
-
         $this->cycle();
     }
 
@@ -73,6 +71,10 @@ final class Game
     private function cycle(): void
     {
         foreach ($this->players as $player) {
+            $this->render->section(sprintf('Player %s turn.', $player->name()));
+            $this->dealer->dropCards();
+            $this->render->renderGame();
+
             $messages = null;
 
             $result = $this->playerTurn($player);
@@ -88,8 +90,8 @@ final class Game
                 $messages = ['Dealer won.'];
             }
 
-            $this->render->info($messages);
             $this->render->renderGame();
+            $this->render->info($messages);
         }
     }
 

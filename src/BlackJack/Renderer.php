@@ -39,6 +39,11 @@ final class Renderer
         $this->renderPlayerCards($this->allPlayable());
     }
 
+    public function section(string $message): void
+    {
+        $this->io->section($message);
+    }
+
     public function error(string $message): void
     {
         $this->io->error($message);

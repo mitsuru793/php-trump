@@ -20,4 +20,10 @@ final class Dealer implements Playable
         shuffle($cards);
         return new Deck($cards);
     }
+
+    public function dropCards(): self
+    {
+        $this->cards = [];
+        return $this;
+    }
 }
