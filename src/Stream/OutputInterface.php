@@ -10,4 +10,9 @@ interface OutputInterface
      * @param string|string[] $lines
      */
     public function write($lines);
+
+    /**
+     * @param string|string[] $lines
+     */
+    public function puts($lines);
 }

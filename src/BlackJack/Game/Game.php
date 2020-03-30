@@ -8,6 +8,7 @@ use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayerActionResult;
 use Trump\BlackJack\Renderer;
 use Trump\Deck\Deck;
+use Trump\Stream\InputInterface;
 use Trump\Stream\OutputInterface;
 
 final class Game
@@ -15,6 +16,8 @@ final class Game
     use HasPlayerActions;
 
     use HasCardActions;
+
+    private InputInterface $input;
 
     private OutputInterface $output;
 
@@ -27,8 +30,9 @@ final class Game
 
     private Renderer $render;
 
-    public function __construct(OutputInterface $output, Dealer $dealer, array $players, Deck $deck)
+    public function __construct(InputInterface $input, OutputInterface $output, Dealer $dealer, array $players, Deck $deck)
     {
+        $this->input = $input;
         $this->output = $output;
         $this->dealer = $dealer;
         $this->players = $players;
@@ -39,7 +43,7 @@ final class Game
     public function run(): void
     {
         $this->passFirstCard();
-        $this->output->write($this->render->renderGame());
+        $this->output->puts($this->render->renderGame());
 
         $this->cycle();
     }
@@ -62,7 +66,7 @@ final class Game
                 $messages = ['Dealer won.'];
             }
 
-            $this->output->write([
+            $this->output->puts([
                 $this->render->info($messages),
                 $this->render->renderGame(),
             ]);
@@ -76,7 +80,7 @@ final class Game
                 try {
                     $action = $this->askAction($player);
                 } catch (\UnexpectedValueException $e) {
-                    $this->output->write(
+                    $this->output->puts(
                         $this->render->error($e->getMessage())
                     );
                     continue;
@@ -84,7 +88,7 @@ final class Game
 
                 if ($action->isHit()) {
                     $this->hit($player);
-                    $this->output->write(
+                    $this->output->puts(
                         $this->render->renderGame()
                     );
                     continue;

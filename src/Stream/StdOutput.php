@@ -12,6 +12,17 @@ final class StdOutput implements OutputInterface
         }
 
         foreach ($lines as $line) {
+            echo $line;
+        }
+    }
+
+    public function puts($lines): void
+    {
+        if (!is_array($lines)) {
+            $lines = [$lines];
+        }
+
+        foreach ($lines as $line) {
             echo $line . PHP_EOL;
         }
     }

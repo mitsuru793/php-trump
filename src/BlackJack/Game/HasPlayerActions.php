@@ -14,8 +14,9 @@ trait HasPlayerActions
 {
     private function askAction(Player $player): PlayAction
     {
-        $msg = sprintf('Player %s\'s action:', $player->name());
-        $action = readline($msg);
+        $msg = sprintf('Player %s\'s action: ', $player->name());
+        $this->output->write($msg);
+        $action = $this->input->ask();
         if (!PlayAction::isValid($action)) {
             $err = sprintf('Select actions: %s', implode(' / ', PlayAction::values()));
             throw new \UnexpectedValueException($err);

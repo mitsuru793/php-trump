@@ -6,10 +6,12 @@ use Trump\BlackJack\Game\Game;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 use Trump\Deck\Deck;
+use Trump\Stream\StdInput;
 use Trump\Stream\StdOutput;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$input = new StdInput();
 $output = new StdOutput();
 
 $dealer = new Dealer('Claire');
@@ -19,6 +21,6 @@ $players = [
 ];
 
 $deck = $dealer->shuffle(Deck::create());
-$game = new Game($output, $dealer, $players, $deck);
+$game = new Game($input, $output, $dealer, $players, $deck);
 $game->run();
 
