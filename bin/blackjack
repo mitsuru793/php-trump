@@ -6,13 +6,13 @@ use Trump\BlackJack\Game\Game;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 use Trump\Deck\Deck;
-use Trump\Stream\StdInput;
-use Trump\Stream\StdOutput;
+use Trump\Stream\Input;
+use Trump\Stream\Output;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$input = new StdInput();
-$output = new StdOutput();
+$input = new Input(STDIN);
+$output = new Output(STDOUT);
 
 $dealer = new Dealer('Claire');
 $players = [

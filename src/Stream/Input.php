@@ -3,14 +3,17 @@ declare(strict_types=1);
 
 namespace Trump\Stream;
 
-final class StdInput implements InputInterface
+final class Input implements InputInterface
 {
     /** @var resource */
     private $input;
 
-    public function __construct()
+    /**
+     * @param resource $input
+     */
+    public function __construct($input)
     {
-        $this->input = STDIN;
+        $this->input = $input;
     }
 
     public function read(): string
