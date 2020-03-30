@@ -2,25 +2,14 @@
 <?php
 declare(strict_types=1);
 
-use Trump\BlackJack\Game\Game;
-use Trump\BlackJack\Playable\Dealer;
-use Trump\BlackJack\Playable\Player;
-use Trump\Deck\Deck;
-use Trump\Stream\Input;
-use Trump\Stream\Output;
+use Symfony\Component\Console\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$input = new Input(STDIN);
-$output = new Output(STDOUT);
+$application = new Application();
 
-$dealer = new Dealer('Claire');
-$players = [
-    new Player('Mike'),
-    new Player('Jane'),
-];
-
-$deck = $dealer->shuffle(Deck::create());
-$game = new Game($input, $output, $dealer, $players, $deck);
-$game->run();
+$command = new \Trump\BlackJack\Command();
+$application->add($command);
+$application->setDefaultCommand($command->getName());
+$application->run();
 

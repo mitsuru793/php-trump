@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Trump\BlackJack\Game;
 
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayerActionResult;
 use Trump\BlackJack\Renderer;
 use Trump\Deck\Deck;
-use Trump\Stream\InputInterface;
-use Trump\Stream\OutputInterface;
 
 final class Game
 {
@@ -37,15 +38,34 @@ final class Game
         $this->dealer = $dealer;
         $this->players = $players;
         $this->deck = $deck;
-        $this->render = new Renderer($this->dealer, $this->players, $this->deck);
+        $io = new SymfonyStyle($input, $output);
+        $this->render = new Renderer($io, $this);
     }
 
     public function run(): void
     {
         $this->passFirstCard();
-        $this->output->puts($this->render->renderGame());
+        $this->output->writeln($this->render->renderGame());
 
         $this->cycle();
+    }
+
+    public function dealer(): Dealer
+    {
+        return $this->dealer;
+    }
+
+    /**
+     * @return Player[]
+     */
+    public function players(): array
+    {
+        return $this->players;
+    }
+
+    public function deck(): Deck
+    {
+        return $this->deck;
     }
 
     private function cycle(): void
@@ -66,7 +86,7 @@ final class Game
                 $messages = ['Dealer won.'];
             }
 
-            $this->output->puts([
+            $this->output->writeln([
                 $this->render->info($messages),
                 $this->render->renderGame(),
             ]);
@@ -80,7 +100,7 @@ final class Game
                 try {
                     $action = $this->askAction($player);
                 } catch (\UnexpectedValueException $e) {
-                    $this->output->puts(
+                    $this->output->writeln(
                         $this->render->error($e->getMessage())
                     );
                     continue;
@@ -88,7 +108,7 @@ final class Game
 
                 if ($action->isHit()) {
                     $this->hit($player);
-                    $this->output->puts(
+                    $this->output->writeln(
                         $this->render->renderGame()
                     );
                     continue;

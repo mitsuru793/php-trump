@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Trump\BlackJack;
 
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Trump\BlackJack\Game\Game;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Playable;
 use Trump\BlackJack\Playable\Player;
@@ -11,6 +13,9 @@ use Trump\Deck\Deck;
 
 final class Renderer
 {
+    /** @var SymfonyStyle */
+    private $io;
+
     private Dealer $dealer;
 
     /** @var Player[] */
@@ -21,11 +26,12 @@ final class Renderer
     /**
      * @param Player[] $players
      */
-    public function __construct(Dealer $dealer, array $players, Deck $deck)
+    public function __construct(SymfonyStyle $io, Game $game)
     {
-        $this->dealer = $dealer;
-        $this->players = $players;
-        $this->deck = $deck;
+        $this->io = $io;
+        $this->dealer = $game->dealer();
+        $this->players = $game->players();
+        $this->deck = $game->deck();
     }
 
     public function renderGame(): string
