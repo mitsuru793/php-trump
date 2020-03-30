@@ -34,72 +34,55 @@ final class Renderer
         $this->deck = $game->deck();
     }
 
-    public function renderGame(): string
+    public function renderGame(): void
     {
-        return $this->line()
-            . $this->renderPlayerCards($this->allPlayable());
+        $this->renderPlayerCards($this->allPlayable());
     }
 
-    public function error(string $message): string
+    public function error(string $message): void
     {
-        return $this->line()
-            . $this->puts("! $message !");
+        $this->io->error($message);
     }
 
     /**
      * @param string|string[] $messages
      */
-    public function info($messages): string
+    public function info($messages): void
     {
         if (!is_array($messages)) {
             $messages = [$messages];
         }
 
-        $str = $this->line();
         foreach ($messages as $message) {
-            $str .= $this->puts("> $message <");
+            $this->io->text($message);
         }
-        return $str;
-    }
-
-    private function line(): string
-    {
-        return $this->puts('----------------');
-    }
-
-    private function puts(string $str): string
-    {
-        return $str . PHP_EOL;
     }
 
     /**
      * @param Playable[] $players
      */
-    private function renderPlayerCards(array $players): string
+    private function renderPlayerCards(array $players): void
     {
-        $str = '';
+        $data = [];
         foreach ($players as $player) {
             $cards = array_map(
                 fn (Card $c) => $this->renderCard($c),
                 $player->cards(),
             );
 
-            $player = sprintf(
-                '%s %s(% 2d): %s',
+            $key = sprintf('%s %s (% d)',
                 $player->isDealer() ? 'Dealer' : 'Player',
                 $player->name(),
                 $player->score(),
-                implode(' ', $cards),
             );
-
-            $str .= $this->puts($player);
+            $data[] = [$key => empty($cards) ? 'Nothing' : implode(' ', $cards)];
         }
-        return $str;
+        $this->io->definitionList(...$data);
     }
 
     private function renderCard(Card $card): string
     {
-        $markStr = '';
+        $markStr = null;
         $mark = $card->mark();
         if ($mark->isSpade()) {
             $markStr = '♥';
@@ -111,7 +94,7 @@ final class Renderer
             $markStr = '♦';
         }
 
-        $numStr = '';
+        $numStr = null;
         $num = $card->number()->value();
         switch ($num) {
             case 13:

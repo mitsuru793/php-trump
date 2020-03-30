@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Trump\BlackJack\Game;
 
-use Trump\Deck\Deck;
-
 /**
  * @mixin Game
  */

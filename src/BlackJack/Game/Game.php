@@ -22,6 +22,8 @@ final class Game
 
     private OutputInterface $output;
 
+    private SymfonyStyle $io;
+
     private Dealer $dealer;
 
     /** @var Player[] */
@@ -38,14 +40,14 @@ final class Game
         $this->dealer = $dealer;
         $this->players = $players;
         $this->deck = $deck;
-        $io = new SymfonyStyle($input, $output);
-        $this->render = new Renderer($io, $this);
+        $this->io = new SymfonyStyle($input, $output);
+        $this->render = new Renderer($this->io, $this);
     }
 
     public function run(): void
     {
         $this->passFirstCard();
-        $this->output->writeln($this->render->renderGame());
+        $this->render->renderGame();
 
         $this->cycle();
     }
@@ -86,10 +88,8 @@ final class Game
                 $messages = ['Dealer won.'];
             }
 
-            $this->output->writeln([
-                $this->render->info($messages),
-                $this->render->renderGame(),
-            ]);
+            $this->render->info($messages);
+            $this->render->renderGame();
         }
     }
 
@@ -100,17 +100,13 @@ final class Game
                 try {
                     $action = $this->askAction($player);
                 } catch (\UnexpectedValueException $e) {
-                    $this->output->writeln(
-                        $this->render->error($e->getMessage())
-                    );
+                    $this->render->error($e->getMessage());
                     continue;
                 }
 
                 if ($action->isHit()) {
                     $this->hit($player);
-                    $this->output->writeln(
-                        $this->render->renderGame()
-                    );
+                    $this->render->renderGame();
                     continue;
                 }
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Trump\BlackJack\Game;
 
 use BadMethodCallException;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayAction;
 
@@ -15,8 +14,8 @@ trait HasPlayerActions
 {
     private function askAction(Player $player): PlayAction
     {
-        $msg = sprintf('Player %s\'s action: ', $player->name());
-        $action = (new SymfonyStyle($this->input, $this->output))->ask($msg);
+        $msg = sprintf('Player %s\'s action', $player->name());
+        $action = $this->io->choice($msg, array_values(PlayAction::toArray()));
         if (!PlayAction::isValid($action)) {
             $err = sprintf('Select actions: %s', implode(' / ', PlayAction::values()));
             throw new \UnexpectedValueException($err);
