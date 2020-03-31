@@ -8,7 +8,7 @@ use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayAction;
 
 /**
- * @mixin Game
+ * @mixin GameRunner
  */
 trait HasPlayerActions
 {
@@ -25,7 +25,7 @@ trait HasPlayerActions
 
     private function hit(Player $player): void
     {
-        $card = $this->deck->draw();
+        $card = $this->game->deck()->draw();
         $player->addCard($card);
         if ($player->isBust()) {
             throw new BustException($player);
@@ -42,15 +42,15 @@ trait HasPlayerActions
             throw new BadMethodCallException($err);
         }
 
-        while ($this->dealer->score() < 17) {
-            $card = $this->deck->draw();
-            $this->dealer->addCard($card);
+        while ($this->game->dealer()->score() < 17) {
+            $card = $this->game->deck()->draw();
+            $this->game->dealer()->addCard($card);
         }
 
-        if ($this->dealer->isBust()) {
+        if ($this->game->dealer()->isBust()) {
             return true;
         }
 
-        return $this->dealer->score() < $player->score();
+        return $this->game->dealer()->score() < $player->score();
     }
 }

@@ -6,13 +6,14 @@ namespace Trump\BlackJack\Game;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Trump\BlackJack\Domain\Game;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 use Trump\BlackJack\PlayerActionResult;
 use Trump\BlackJack\Renderer;
 use Trump\Deck\Deck;
 
-final class Game
+final class GameRunner
 {
     use HasPlayerActions;
 
@@ -24,24 +25,17 @@ final class Game
 
     private SymfonyStyle $io;
 
-    private Dealer $dealer;
-
-    /** @var Player[] */
-    private array $players;
-
-    private Deck $deck;
+    private Game $game;
 
     private Renderer $render;
 
-    public function __construct(InputInterface $input, OutputInterface $output, Dealer $dealer, array $players, Deck $deck)
+    public function __construct(InputInterface $input, OutputInterface $output, Game $game)
     {
         $this->input = $input;
         $this->output = $output;
-        $this->dealer = $dealer;
-        $this->players = $players;
-        $this->deck = $deck;
+        $this->game = $game;
         $this->io = new SymfonyStyle($input, $output);
-        $this->render = new Renderer($this->io, $this);
+        $this->render = new Renderer($this->io, $this->game);
     }
 
     public function run(): void
@@ -50,29 +44,11 @@ final class Game
         $this->cycle();
     }
 
-    public function dealer(): Dealer
-    {
-        return $this->dealer;
-    }
-
-    /**
-     * @return Player[]
-     */
-    public function players(): array
-    {
-        return $this->players;
-    }
-
-    public function deck(): Deck
-    {
-        return $this->deck;
-    }
-
     private function cycle(): void
     {
-        foreach ($this->players as $player) {
+        foreach ($this->game->players() as $player) {
             $this->render->section(sprintf('Player %s turn.', $player->name()));
-            $this->dealer->dropCards();
+            $this->game->dealer()->dropCards();
             $this->render->renderGame();
 
             $messages = null;

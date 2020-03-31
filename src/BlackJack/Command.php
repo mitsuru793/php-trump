@@ -5,7 +5,8 @@ namespace Trump\BlackJack;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Trump\BlackJack\Game\Game;
+use Trump\BlackJack\Domain\Game;
+use Trump\BlackJack\Game\GameRunner;
 use Trump\BlackJack\Playable\Dealer;
 use Trump\BlackJack\Playable\Player;
 use Trump\Deck\Deck;
@@ -25,10 +26,11 @@ final class Command extends \Symfony\Component\Console\Command\Command
             new Player('Mike'),
             new Player('Jane'),
         ];
-
         $deck = $dealer->shuffle(Deck::create());
-        $game = new Game($input, $output, $dealer, $players, $deck);
-        $game->run();
+        $game = new Game($dealer, $players, $deck);
+
+        $runner = new GameRunner($input, $output, $game);
+        $runner->run();
 
         return 0;
     }
