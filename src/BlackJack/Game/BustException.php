@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Trump\BlackJack\Game;
 
-use Trump\BlackJack\Playable\Player;
+use Trump\BlackJack\Domain\Playable\Player;
 
 final class BustException extends \RuntimeException
 {

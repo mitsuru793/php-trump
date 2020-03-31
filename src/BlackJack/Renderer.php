@@ -5,8 +5,8 @@ namespace Trump\BlackJack;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Trump\BlackJack\Domain\Game;
-use Trump\BlackJack\Playable\Playable;
-use Trump\BlackJack\Playable\Player;
+use Trump\BlackJack\Domain\Playable\Playable;
+use Trump\BlackJack\Domain\Playable\Player;
 use Trump\Deck\Card;
 
 final class Renderer

@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Playable;
-
-use Trump\Deck\Card;
+namespace Trump\BlackJack\Domain\Playable;
 
 final class Player implements Playable
 {

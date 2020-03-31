@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Trump\BlackJack\Game;
 
 use BadMethodCallException;
-use Trump\BlackJack\Playable\Player;
+use Trump\BlackJack\Domain\Playable\Player;
 use Trump\BlackJack\PlayAction;
 
 /**
