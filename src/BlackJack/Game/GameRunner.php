@@ -6,6 +6,9 @@ namespace Trump\BlackJack\Game;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Trump\BlackJack\Application\Actions\AskPlayerAction;
+use Trump\BlackJack\Application\Actions\PlayerHitsAction;
+use Trump\BlackJack\Application\Actions\PlayerStandsAction;
 use Trump\BlackJack\Domain\Game;
 use Trump\BlackJack\Domain\Playable\Player;
 use Trump\BlackJack\Domain\PlayAction\PlayerActionResult;
@@ -13,8 +16,6 @@ use Trump\BlackJack\Renderer;
 
 final class GameRunner
 {
-    use HasPlayerActions;
-
     use HasCardActions;
 
     private InputInterface $input;
@@ -74,20 +75,20 @@ final class GameRunner
         try {
             while (true) {
                 try {
-                    $action = $this->askAction($player);
+                    $action = (new AskPlayerAction($this->io, $player))();
                 } catch (\UnexpectedValueException $e) {
                     $this->render->error($e->getMessage());
                     continue;
                 }
 
                 if ($action->isHit()) {
-                    $this->hit($player);
+                    (new PlayerHitsAction($this->game->deck(), $player))();
                     $this->render->renderGame();
                     continue;
                 }
 
                 if ($action->isStand()) {
-                    $playerWin = $this->stand($player);
+                    $playerWin = (new PlayerStandsAction($this->game->dealer(), $player, $this->game->deck()))();
                     if ($playerWin) {
                         return PlayerActionResult::won();
                     }
