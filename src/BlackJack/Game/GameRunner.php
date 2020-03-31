@@ -9,6 +9,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Trump\BlackJack\Application\Actions\AskPlayerAction;
 use Trump\BlackJack\Application\Actions\PlayerHitsAction;
 use Trump\BlackJack\Application\Actions\PlayerStandsAction;
+use Trump\BlackJack\Application\Actions\PlayerTurnAction;
 use Trump\BlackJack\Domain\Game;
 use Trump\BlackJack\Domain\Playable\Player;
 use Trump\BlackJack\Domain\PlayAction\PlayerActionResult;
@@ -53,6 +54,7 @@ final class GameRunner
             $messages = null;
 
             $result = $this->playerTurn($player);
+
             if ($result->isBust()) {
                 $e = new BustException($player);
                 $messages = [
@@ -72,31 +74,10 @@ final class GameRunner
 
     private function playerTurn(Player $player): PlayerActionResult
     {
-        try {
-            while (true) {
-                try {
-                    $action = (new AskPlayerAction($this->io, $player))();
-                } catch (\UnexpectedValueException $e) {
-                    $this->render->error($e->getMessage());
-                    continue;
-                }
-
-                if ($action->isHit()) {
-                    (new PlayerHitsAction($this->game->deck(), $player))();
-                    $this->render->renderGame();
-                    continue;
-                }
-
-                if ($action->isStand()) {
-                    $playerWin = (new PlayerStandsAction($this->game->dealer(), $player, $this->game->deck()))();
-                    if ($playerWin) {
-                        return PlayerActionResult::won();
-                    }
-                    return PlayerActionResult::lostByStand();
-                }
-            }
-        } catch (BustException $e) {
-            return PlayerActionResult::bust();
-        }
+        $askPlayerAction = new AskPlayerAction($this->io, $player);
+        $playerHitsAction = new PlayerHitsAction($this->game->deck(), $player);
+        $playerStandsAction = new PlayerStandsAction($this->game->dealer(), $player, $this->game->deck());
+        $playerTurnAction = new PlayerTurnAction($this->render, $askPlayerAction, $playerHitsAction, $playerStandsAction);
+        return $playerTurnAction();
     }
 }
