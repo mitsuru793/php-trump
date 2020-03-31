@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Trump\BlackJack\Domain\Game;
 use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\PlayerActionResult;
+use Trump\BlackJack\Domain\PlayAction\PlayerActionResult;
 use Trump\BlackJack\Renderer;
 
 final class GameRunner

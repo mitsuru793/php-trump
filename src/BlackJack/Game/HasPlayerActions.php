@@ -5,7 +5,7 @@ namespace Trump\BlackJack\Game;
 
 use BadMethodCallException;
 use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\PlayAction;
+use Trump\BlackJack\Domain\PlayAction\PlayAction;
 
 /**
  * @mixin GameRunner
