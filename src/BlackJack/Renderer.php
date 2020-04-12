@@ -7,6 +7,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Trump\BlackJack\Domain\Game;
 use Trump\BlackJack\Domain\Playable\Playable;
 use Trump\BlackJack\Domain\Playable\Player;
+use Trump\BlackJack\Domain\PlayAction\PlayerActionResult;
+use Trump\BlackJack\Game\BustException;
 use Trump\Deck\Card;
 
 final class Renderer
@@ -23,6 +25,22 @@ final class Renderer
     {
         $this->io = $io;
         $this->game = $game;
+    }
+
+    public function renderResult(Player $player, PlayerActionResult $result)
+    {
+        if ($result->isBust()) {
+            $e = new BustException($player);
+            $messages = [
+                $e->getMessage(),
+                'Dealer won.',
+            ];
+        } elseif ($result->didWin()) {
+            $messages = [sprintf('Player %s won.', $player->name())];
+        } else {
+            $messages = ['Dealer won.'];
+        }
+        $this->info($messages);
     }
 
     public function renderGame(): void

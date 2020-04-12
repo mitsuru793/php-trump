@@ -55,20 +55,8 @@ final class GameRunner
 
             $result = $this->playerTurn($player);
 
-            if ($result->isBust()) {
-                $e = new BustException($player);
-                $messages = [
-                    $e->getMessage(),
-                    'Dealer won.',
-                ];
-            } elseif ($result->didWin()) {
-                $messages = [sprintf('Player %s won.', $player->name())];
-            } else {
-                $messages = ['Dealer won.'];
-            }
-
             $this->render->renderGame();
-            $this->render->info($messages);
+            $this->render->renderResult($player, $result);
         }
     }
 
