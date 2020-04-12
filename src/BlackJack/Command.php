@@ -9,6 +9,7 @@ use Trump\BlackJack\Domain\Game;
 use Trump\BlackJack\Domain\Playable\Dealer;
 use Trump\BlackJack\Domain\Playable\Player;
 use Trump\BlackJack\Game\GameRunner;
+use Trump\Deck\Cards;
 use Trump\Deck\Deck;
 
 final class Command extends \Symfony\Component\Console\Command\Command
@@ -21,10 +22,10 @@ final class Command extends \Symfony\Component\Console\Command\Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dealer = new Dealer('Claire');
+        $dealer = new Dealer('Claire', Cards::empty());
         $players = [
-            new Player('Mike'),
-            new Player('Jane'),
+            new Player('Mike', Cards::empty()),
+            new Player('Jane', Cards::empty()),
         ];
         $deck = $dealer->shuffle(Deck::create());
         $game = new Game($dealer, $players, $deck);

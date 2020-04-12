@@ -63,7 +63,7 @@ final class Renderer
         foreach ($players as $player) {
             $cards = array_map(
                 fn(Card $c) => $this->renderCard($c),
-                $player->cards(),
+                iterator_to_array($player->cards()),
             );
 
             $key = sprintf('%s %s (% d)',

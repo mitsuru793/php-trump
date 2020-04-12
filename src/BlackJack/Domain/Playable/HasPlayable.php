@@ -4,15 +4,15 @@ declare(strict_types=1);
 namespace Trump\BlackJack\Domain\Playable;
 
 use Trump\Deck\Card;
+use Trump\Deck\Cards;
 
 trait HasPlayable
 {
     private string $name;
 
-    /** @var Card[] */
-    private array $cards;
+    private Cards $cards;
 
-    public function __construct(string $name, $cards = [])
+    public function __construct(string $name, Cards $cards)
     {
         $this->name = $name;
         $this->cards = $cards;
@@ -25,14 +25,11 @@ trait HasPlayable
 
     public function addCard(Card $card): self
     {
-        $this->cards[] = $card;
+        $this->cards->add($card);
         return $this;
     }
 
-    /**
-     * @return Card[]
-     */
-    public function cards(): array
+    public function cards(): Cards
     {
         return $this->cards;
     }
@@ -44,11 +41,6 @@ trait HasPlayable
 
     public function score(): int
     {
-        $score = array_reduce($this->cards, function (int $sum, Card $card) {
-            $sum += $card->number()->value();
-            return $sum;
-        }, 0);
-        assert(is_int($score));
-        return $score;
+        return $this->cards->maxScore();
     }
 }

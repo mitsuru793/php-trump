@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Trump\BlackJack\Domain\Playable;
 
 use Trump\Deck\Card;
+use Trump\Deck\Cards;
 
 interface Playable
 {
@@ -16,7 +17,7 @@ interface Playable
      */
     public function addCard(Card $card);
 
-    public function cards();
+    public function cards(): Cards;
 
     public function isBust(): bool;
 
