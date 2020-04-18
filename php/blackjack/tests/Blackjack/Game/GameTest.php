@@ -7,6 +7,7 @@ use Helper\TestBase;
 use Trump\BlackJack\Domain\Playable\Dealer;
 use Trump\BlackJack\Domain\Playable\Player;
 use Trump\BlackJack\Renderer;
+use Trump\Deck\Cards;
 use Trump\Deck\Deck;
 use Trump\Stream\Input;
 use Trump\Stream\Output;
@@ -18,10 +19,10 @@ final class GameTest extends TestBase
         $in = fopen('php://memory', 'w');;
         $out = fopen('php://memory', 'r+');;
 
-        $dealer = new Dealer('Claire');
+        $dealer = new Dealer('Claire', Cards::empty());
         $players = [
-            new Player('Mike'),
-            new Player('Jane'),
+            new Player('Mike', Cards::empty()),
+            new Player('Jane', Cards::empty()),
         ];
 
         $deck = Deck::create();

@@ -5,22 +5,22 @@ namespace Trump\Deck;
 
 final class Card
 {
-    private Mark $mark;
+    private CardMark $mark;
 
-    private Number $number;
+    private CardNumber $number;
 
-    public function __construct(Mark $mark, Number $number)
+    public function __construct(CardMark $mark, CardNumber $number)
     {
         $this->mark = $mark;
         $this->number = $number;
     }
 
-    public function mark(): Mark
+    public function mark(): CardMark
     {
         return $this->mark;
     }
 
-    public function number(): Number
+    public function number(): CardNumber
     {
         return $this->number;
     }

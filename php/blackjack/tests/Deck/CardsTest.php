@@ -32,7 +32,7 @@ class CardsTest extends TestBase
 
     private function fromNumbers(array $nums): Cards
     {
-        $cards = array_map(fn ($num) => new Card(Mark::SPADE(), Number::of($num)), $nums);
+        $cards = array_map(fn ($num) => new Card(CardMark::SPADE(), CardNumber::of($num)), $nums);
         return new Cards($cards);
     }
 }

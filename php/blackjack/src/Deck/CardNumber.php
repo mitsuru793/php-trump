@@ -38,7 +38,7 @@ final class CardNumber
         return $this->value;
     }
 
-    public function equals(Number $other): bool
+    public function equals(CardNumber $other): bool
     {
         return $this->value === $other->value;
     }
