@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack;
+namespace BlackJack\BlackJack;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Trump\BlackJack\Domain\Game;
-use Trump\BlackJack\Domain\Playable\Dealer;
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\Game\GameRunner;
-use Trump\Deck\Cards;
-use Trump\Deck\Deck;
+use BlackJack\BlackJack\Domain\Game;
+use BlackJack\BlackJack\Domain\Playable\Dealer;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Game\GameRunner;
+use BlackJack\Deck\Cards;
+use BlackJack\Deck\Deck;
 
 final class Command extends \Symfony\Component\Console\Command\Command
 {

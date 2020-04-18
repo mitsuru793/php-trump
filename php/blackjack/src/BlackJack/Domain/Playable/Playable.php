@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Domain\Playable;
+namespace BlackJack\BlackJack\Domain\Playable;
 
-use Trump\Deck\Card;
-use Trump\Deck\Cards;
+use BlackJack\Deck\Card;
+use BlackJack\Deck\Cards;
 
 interface Playable
 {

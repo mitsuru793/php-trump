@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Application\Actions;
+namespace BlackJack\BlackJack\Application\Actions;
 
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\Game\BustException;
-use Trump\Deck\Deck;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Game\BustException;
+use BlackJack\Deck\Deck;
 
 final class PlayerHitsAction
 {

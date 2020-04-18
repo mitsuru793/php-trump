@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Application\Actions;
+namespace BlackJack\BlackJack\Application\Actions;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\Domain\PlayAction\PlayAction;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Domain\PlayAction\PlayAction;
 
 final class AskPlayerAction
 {

@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack;
+namespace BlackJack\BlackJack;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Trump\BlackJack\Domain\Game;
-use Trump\BlackJack\Domain\Playable\Playable;
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\Domain\PlayAction\PlayerActionResult;
-use Trump\BlackJack\Game\BustException;
-use Trump\Deck\Card;
+use BlackJack\BlackJack\Domain\Game;
+use BlackJack\BlackJack\Domain\Playable\Playable;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Domain\PlayAction\PlayerActionResult;
+use BlackJack\BlackJack\Game\BustException;
+use BlackJack\Deck\Card;
 
 final class Renderer
 {

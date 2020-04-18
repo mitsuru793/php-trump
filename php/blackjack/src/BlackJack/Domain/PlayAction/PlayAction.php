@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Domain\PlayAction;
+namespace BlackJack\BlackJack\Domain\PlayAction;
 
-use Trump\Enum;
+use BlackJack\Enum;
 
 /**
  * @method static self HIT()

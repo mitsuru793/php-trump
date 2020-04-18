@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\Deck;
+namespace BlackJack\Deck;
 
-use Trump\Enum;
+use BlackJack\Enum;
 
 /**
  * @method static self HEART()

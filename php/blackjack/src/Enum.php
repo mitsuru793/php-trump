@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump;
+namespace BlackJack;
 
 abstract class Enum extends \MyCLabs\Enum\Enum
 {

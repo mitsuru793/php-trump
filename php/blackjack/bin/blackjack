@@ -8,7 +8,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $application = new Application();
 
-$command = new \Trump\BlackJack\Command();
+$command = new \BlackJack\BlackJack\Command();
 $application->add($command);
 $application->setDefaultCommand($command->getName());
 $application->run();

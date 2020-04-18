@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\Blackjack\Game;
+namespace BlackJack\Blackjack\Game;
 
 use Helper\TestBase;
-use Trump\BlackJack\Domain\Playable\Dealer;
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\Renderer;
-use Trump\Deck\Cards;
-use Trump\Deck\Deck;
-use Trump\Stream\Input;
-use Trump\Stream\Output;
+use BlackJack\BlackJack\Domain\Playable\Dealer;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Renderer;
+use BlackJack\Deck\Cards;
+use BlackJack\Deck\Deck;
+use BlackJack\Stream\Input;
+use BlackJack\Stream\Output;
 
 final class GameTest extends TestBase
 {

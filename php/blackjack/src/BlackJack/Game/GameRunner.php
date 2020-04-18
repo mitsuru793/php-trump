@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Game;
+namespace BlackJack\BlackJack\Game;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Trump\BlackJack\Application\Actions\AskPlayerAction;
-use Trump\BlackJack\Application\Actions\PlayerHitsAction;
-use Trump\BlackJack\Application\Actions\PlayerStandsAction;
-use Trump\BlackJack\Application\Actions\PlayerTurnAction;
-use Trump\BlackJack\Domain\Game;
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\BlackJack\Domain\PlayAction\PlayerActionResult;
-use Trump\BlackJack\Renderer;
+use BlackJack\BlackJack\Application\Actions\AskPlayerAction;
+use BlackJack\BlackJack\Application\Actions\PlayerHitsAction;
+use BlackJack\BlackJack\Application\Actions\PlayerStandsAction;
+use BlackJack\BlackJack\Application\Actions\PlayerTurnAction;
+use BlackJack\BlackJack\Domain\Game;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Domain\PlayAction\PlayerActionResult;
+use BlackJack\BlackJack\Renderer;
 
 final class GameRunner
 {

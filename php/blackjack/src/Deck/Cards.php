@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\Deck;
+namespace BlackJack\Deck;
 
-use Trump\BlackJack\Game\BustException;
+use BlackJack\BlackJack\Game\BustException;
 
 final class Cards implements \IteratorAggregate
 {

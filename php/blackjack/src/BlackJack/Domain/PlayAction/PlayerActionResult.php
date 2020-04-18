@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Domain\PlayAction;
+namespace BlackJack\BlackJack\Domain\PlayAction;
 
 final class PlayerActionResult
 {

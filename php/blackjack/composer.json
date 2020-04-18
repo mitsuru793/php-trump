@@ -1,5 +1,5 @@
 {
-    "name": "mitsuru793/trump",
+    "name": "mitsuru793/blackjack",
     "description": "Description",
     "type": "library",
     "authors": [
@@ -26,13 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Trump\\": "src/"
+            "BlackJack\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Helper\\": "tests/Helper",
-            "Trump\\": "tests/"
+            "BlackJack\\": "tests/"
         }
     }
 }

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Application\Actions;
+namespace BlackJack\BlackJack\Application\Actions;
 
 use BadMethodCallException;
-use Trump\BlackJack\Domain\Playable\Dealer;
-use Trump\BlackJack\Domain\Playable\Player;
-use Trump\Deck\Deck;
+use BlackJack\BlackJack\Domain\Playable\Dealer;
+use BlackJack\BlackJack\Domain\Playable\Player;
+use BlackJack\Deck\Deck;
 
 final class PlayerStandsAction
 {

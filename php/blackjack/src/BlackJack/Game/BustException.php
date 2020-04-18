@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\BlackJack\Game;
+namespace BlackJack\BlackJack\Game;
 
-use Trump\BlackJack\Domain\Playable\Player;
+use BlackJack\BlackJack\Domain\Playable\Player;
 
 final class BustException extends \RuntimeException
 {
