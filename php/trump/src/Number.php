@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\Deck;
+namespace Trump;
 
 use InvalidArgumentException;
 
-final class CardNumber
+final class Number
 {
     private int $value;
 

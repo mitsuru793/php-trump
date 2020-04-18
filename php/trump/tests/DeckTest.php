@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Trump\Deck;
+namespace Trump;
 
 use Helper\TestBase;
 
@@ -19,13 +19,13 @@ class DeckTest extends TestBase
         ];
         $markCards = array_reduce($deck->cards(), function (array $markCards, Card $card) {
             $mark = $card->mark();
-            if ($mark->isHeart()) {
+            if ($mark->equals(Mark::HEART())) {
                 array_push($markCards['heart'], $card);
-            } elseif ($mark->isClover()) {
+            } elseif ($mark->equals(Mark::CLOVER())) {
                 array_push($markCards['clover'], $card);
-            } elseif ($mark->isDiamond()) {
+            } elseif ($mark->equals(Mark::DIAMOND())) {
                 array_push($markCards['diamond'], $card);
-            } elseif ($mark->isSpade()) {
+            } elseif ($mark->equals(Mark::SPADE())) {
                 array_push($markCards['spade'], $card);
             } else {
                 $err = sprintf('Invalid card mark: %s', $mark);
@@ -44,7 +44,7 @@ class DeckTest extends TestBase
             foreach ($cards as $card) {
                 assert($card instanceof Card);
 
-                $this->assertSame($mark, $card->mark()->value());
+                $this->assertSame($mark, $card->mark()->getValue());
 
                 $found = array_search($card->number()->value(), $nums, true) !== false;
                 $this->assertTrue($found);
