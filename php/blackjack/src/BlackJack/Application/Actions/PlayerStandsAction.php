@@ -6,7 +6,7 @@ namespace BlackJack\BlackJack\Application\Actions;
 use BadMethodCallException;
 use BlackJack\BlackJack\Domain\Playable\Dealer;
 use BlackJack\BlackJack\Domain\Playable\Player;
-use BlackJack\Deck\Deck;
+use Trump\Deck;
 
 final class PlayerStandsAction
 {
@@ -39,7 +39,7 @@ final class PlayerStandsAction
             throw new BadMethodCallException($err);
         }
 
-        while ($this->dealer->score() < 17) {
+        while ($this->dealer->score()->value() < 17) {
             $card = $this->deck->draw();
             $this->dealer->addCard($card);
         }
@@ -48,6 +48,6 @@ final class PlayerStandsAction
             return true;
         }
 
-        return $this->dealer->score() < $this->player->score();
+        return $this->dealer->score()->value() < $this->player->score()->value();
     }
 }

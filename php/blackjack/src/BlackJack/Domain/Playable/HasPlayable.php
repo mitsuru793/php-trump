@@ -3,16 +3,20 @@ declare(strict_types=1);
 
 namespace BlackJack\BlackJack\Domain\Playable;
 
-use BlackJack\Deck\Card;
-use BlackJack\Deck\Cards;
+use BlackJack\BlackJack\Domain\Score\Score;
+use Trump\Card;
 
 trait HasPlayable
 {
     private string $name;
 
-    private Cards $cards;
+    /** @var Card[] */
+    private array $cards;
 
-    public function __construct(string $name, Cards $cards)
+    /**
+     * @param Card[] $cards
+     */
+    public function __construct(string $name, array $cards)
     {
         $this->name = $name;
         $this->cards = $cards;
@@ -25,22 +29,25 @@ trait HasPlayable
 
     public function addCard(Card $card): self
     {
-        $this->cards->add($card);
+        $this->cards[] = $card;
         return $this;
     }
 
-    public function cards(): Cards
+    /**
+     * @return Card[]
+     */
+    public function cards(): array
     {
         return $this->cards;
     }
 
     public function isBust(): bool
     {
-        return $this->score() > 21;
+        return $this->score()->value() > 21;
     }
 
-    public function score(): int
+    public function score(): Score
     {
-        return $this->cards->maxScore();
+        return Score::maxFromCards($this->cards);
     }
 }

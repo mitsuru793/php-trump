@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace BlackJack\BlackJack;
 
-use Symfony\Component\Console\Style\SymfonyStyle;
 use BlackJack\BlackJack\Domain\Game;
 use BlackJack\BlackJack\Domain\Playable\Playable;
 use BlackJack\BlackJack\Domain\Playable\Player;
 use BlackJack\BlackJack\Domain\PlayAction\PlayerActionResult;
 use BlackJack\BlackJack\Game\BustException;
-use BlackJack\Deck\Card;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Trump\Card;
+use Trump\Mark;
 
 final class Renderer
 {
@@ -81,13 +82,13 @@ final class Renderer
         foreach ($players as $player) {
             $cards = array_map(
                 fn(Card $c) => $this->renderCard($c),
-                iterator_to_array($player->cards()),
+                $player->cards(),
             );
 
             $key = sprintf('%s %s (% d)',
                 $player->isDealer() ? 'Dealer' : 'Player',
                 $player->name(),
-                $player->score(),
+                $player->score()->value(),
             );
             $data[] = [$key => empty($cards) ? 'Nothing' : implode(' ', $cards)];
         }
@@ -98,13 +99,13 @@ final class Renderer
     {
         $markStr = null;
         $mark = $card->mark();
-        if ($mark->isSpade()) {
+        if ($mark->equals(Mark::HEART())) {
             $markStr = '♥';
-        } elseif ($mark->isHeart()) {
+        } elseif ($mark->equals(Mark::SPADE())) {
             $markStr = '♠';
-        } elseif ($mark->isClover()) {
+        } elseif ($mark->equals(Mark::CLOVER())) {
             $markStr = '♣';
-        } elseif ($mark->isDiamond()) {
+        } elseif ($mark->equals(Mark::DIAMOND())) {
             $markStr = '♦';
         }
 

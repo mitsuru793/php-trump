@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "709113998a7acab905a0384c77c75d8a",
+    "content-hash": "e8a0c88107ac486e749e60c6da456ed8",
     "packages": [
+        {
+            "name": "mitsuru793/trump",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../trump",
+                "reference": "94b5806e0244c12ae8f8a5f4b5f50917c927f5ed"
+            },
+            "require": {
+                "myclabs/php-enum": "^1.7"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpstan/phpstan": "^0.12.18",
+                "phpunit/phpunit": "^8.4",
+                "symfony/var-dumper": "^4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Trump\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Helper\\": "tests/Helper",
+                    "Trump\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --color=always"
+                ],
+                "analyze": [
+                    "phpstan analyze $(git diff --diff-filter=ACMR --name-only --find-renames=0% $(git merge-base origin/master HEAD))"
+                ],
+                "fix": [
+                    "php-cs-fixer fix ."
+                ]
+            },
+            "authors": [
+                {
+                    "name": "mitsuru793",
+                    "email": "mitsuru793@gmail.com"
+                }
+            ],
+            "description": "Description"
+        },
         {
             "name": "myclabs/php-enum",
             "version": "1.7.6",
@@ -3815,7 +3863,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mitsuru793/trump": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

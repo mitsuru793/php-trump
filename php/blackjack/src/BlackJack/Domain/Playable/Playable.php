@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace BlackJack\BlackJack\Domain\Playable;
 
-use BlackJack\Deck\Card;
-use BlackJack\Deck\Cards;
+use BlackJack\BlackJack\Domain\Score\Score;
+use Trump\Card;
 
 interface Playable
 {
@@ -17,9 +17,12 @@ interface Playable
      */
     public function addCard(Card $card);
 
-    public function cards(): Cards;
+    /**
+     * @return Card[]
+     */
+    public function cards(): array;
 
     public function isBust(): bool;
 
-    public function score(): int;
+    public function score(): Score;
 }

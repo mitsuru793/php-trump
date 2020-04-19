@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace BlackJack\BlackJack;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use BlackJack\BlackJack\Domain\Game;
 use BlackJack\BlackJack\Domain\Playable\Dealer;
 use BlackJack\BlackJack\Domain\Playable\Player;
 use BlackJack\BlackJack\Game\GameRunner;
-use BlackJack\Deck\Cards;
-use BlackJack\Deck\Deck;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Trump\Deck;
 
 final class Command extends \Symfony\Component\Console\Command\Command
 {
@@ -22,10 +21,10 @@ final class Command extends \Symfony\Component\Console\Command\Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dealer = new Dealer('Claire', Cards::empty());
+        $dealer = new Dealer('Claire', []);
         $players = [
-            new Player('Mike', Cards::empty()),
-            new Player('Jane', Cards::empty()),
+            new Player('Mike', []),
+            new Player('Jane', []),
         ];
         $deck = $dealer->shuffle(Deck::create());
         $game = new Game($dealer, $players, $deck);

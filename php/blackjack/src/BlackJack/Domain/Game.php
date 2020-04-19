@@ -5,7 +5,7 @@ namespace BlackJack\BlackJack\Domain;
 
 use BlackJack\BlackJack\Domain\Playable\Dealer;
 use BlackJack\BlackJack\Domain\Playable\Player;
-use BlackJack\Deck\Deck;
+use Trump\Deck;
 
 final class Game
 {

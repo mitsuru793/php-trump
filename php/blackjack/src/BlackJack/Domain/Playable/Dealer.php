@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace BlackJack\BlackJack\Domain\Playable;
 
-use BlackJack\Deck\Cards;
-use BlackJack\Deck\Deck;
+use Trump\Deck;
 
 final class Dealer implements Playable
 {
@@ -24,7 +23,7 @@ final class Dealer implements Playable
 
     public function dropCards(): self
     {
-        $this->cards = Cards::empty();
+        $this->cards = [];
         return $this;
     }
 }

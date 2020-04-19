@@ -1,19 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace BlackJack\Deck;
+namespace BlackJack\BlackJack\Domain\Score;
 
 use Helper\TestBase;
+use Trump\Card;
+use Trump\Mark;
+use Trump\Number;
 
-class CardsTest extends TestBase
+final class ScoreTest extends TestBase
 {
     /**
      * @dataProvider maxScoreProvider
      */
     public function testMaxScore(array $nums, int $expected)
     {
-        $max = $this->fromNumbers($nums)->maxScore();
-        $this->assertSame($expected, $max);
+        $cards = $this->fromNumbers($nums);
+        $this->assertSame($expected, Score::maxFromCards($cards)->value());
     }
 
     public function maxScoreProvider()
@@ -30,9 +33,8 @@ class CardsTest extends TestBase
     }
 
 
-    private function fromNumbers(array $nums): Cards
+    private function fromNumbers(array $nums): array
     {
-        $cards = array_map(fn ($num) => new Card(CardMark::SPADE(), CardNumber::of($num)), $nums);
-        return new Cards($cards);
+        return array_map(fn($num) => new Card(Mark::SPADE(), Number::of($num)), $nums);
     }
 }

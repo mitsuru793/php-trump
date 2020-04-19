@@ -11,7 +11,7 @@ final class BustException extends \RuntimeException
 
     public function __construct(Player $player)
     {
-        $msg = sprintf('Player %s is bust at %d', $player->name(), $player->score());
+        $msg = sprintf('Player %s is bust at %d', $player->name(), $player->score()->value());
         parent::__construct($msg);
     }
 }

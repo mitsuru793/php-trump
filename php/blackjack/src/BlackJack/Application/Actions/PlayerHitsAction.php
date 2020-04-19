@@ -5,7 +5,7 @@ namespace BlackJack\BlackJack\Application\Actions;
 
 use BlackJack\BlackJack\Domain\Playable\Player;
 use BlackJack\BlackJack\Game\BustException;
-use BlackJack\Deck\Deck;
+use Trump\Deck;
 
 final class PlayerHitsAction
 {

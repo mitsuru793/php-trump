@@ -10,11 +10,18 @@
       "analyze": "phpstan analyze $(git diff --diff-filter=ACMR --name-only --find-renames=0% $(git merge-base origin/master HEAD))",
       "fix": "php-cs-fixer fix ."
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../trump"
+        }
+    ],
     "require": {
         "ext-readline": "*",
         "tightenco/collect": "^6.5",
         "symfony/console": "^5.0",
-        "myclabs/php-enum": "^1.7"
+        "myclabs/php-enum": "^1.7",
+        "mitsuru793/trump": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4",
