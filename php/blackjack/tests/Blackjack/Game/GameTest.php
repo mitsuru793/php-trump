@@ -3,49 +3,40 @@ declare(strict_types=1);
 
 namespace BlackJack\Blackjack\Game;
 
+use BlackJack\BlackJack\Command as BlackJackCommand;
 use Helper\TestBase;
-use BlackJack\BlackJack\Domain\Playable\Dealer;
-use BlackJack\BlackJack\Domain\Playable\Player;
-use BlackJack\BlackJack\Renderer;
-use BlackJack\Deck\Cards;
-use BlackJack\Deck\Deck;
-use BlackJack\Stream\Input;
-use BlackJack\Stream\Output;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Tester\CommandTester;
 
 final class GameTest extends TestBase
 {
+    private BlackJackCommand $command;
+    private CommandTester $tester;
+
     public function testRun()
     {
-        $in = fopen('php://memory', 'w');;
-        $out = fopen('php://memory', 'r+');;
+        $this->tester->setInputs([
+            'stand',
+            'stand',
+        ]);
+        $this->tester->execute([]);
+        $actual = $this->tester->getDisplay();
 
-        $dealer = new Dealer('Claire', Cards::empty());
-        $players = [
-            new Player('Mike', Cards::empty()),
-            new Player('Jane', Cards::empty()),
-        ];
+        $this->assertRegExp('/Player [a-zA-Z]+ turn/', $actual);
+        $this->assertRegExp('/(?:Player [a-zA-Z]+|Dealer) won/', $actual);
+        $this->assertNotRegExp('/Error|Exception/', $actual);
+    }
 
-        $deck = Deck::create();
+    public function setUp(): void
+    {
+        parent::setUp();
+        $application = new Application();
+        $application->add(new BlackJackCommand('blackjack'));
 
-        $game = new GameRunner(
-            new Input($in), new Output($out),
-            $dealer, $players, $deck,
-        );
+        $command = $application->find('blackjack');
+        assert($command instanceof BlackJackCommand);
+        $this->command = $command;
 
-        fwrite($in, 'stand' . PHP_EOL);
-        fwrite($in, 'stand' . PHP_EOL);
-        fwrite($in, 'stand' . PHP_EOL);
-        $game->run();
-
-        $render = new Renderer($dealer, $players, $deck);
-
-        $expected = <<<EOF
-        Dealer Claire( 0):
-        Player Mike( 1): [♠1]
-        Player Jane( 1): [♠1]
-        EOF;
-
-        rewind($out);
-        $this->assertEquals($expected, stream_get_contents($out));
+        $this->tester = new CommandTester($this->command);
     }
 }
