@@ -6,7 +6,7 @@
         {"name": "mitsuru793", "email": "mitsuru793@gmail.com"}
     ],
     "scripts": {
-      "test": "phpunit --color=always",
+      "test": "phpunit --color=always < /dev/tty",
       "analyze": "phpstan analyze $(git diff --diff-filter=ACMR --name-only --find-renames=0% $(git merge-base origin/master HEAD))",
       "fix": "php-cs-fixer fix ."
     },

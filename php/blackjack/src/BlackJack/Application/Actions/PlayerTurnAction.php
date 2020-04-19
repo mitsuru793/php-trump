@@ -29,12 +29,7 @@ final class PlayerTurnAction
     {
         try {
             while (true) {
-                try {
-                    $action = ($this->askPlayerAction)();
-                } catch (\UnexpectedValueException $e) {
-                    $this->render->error($e->getMessage());
-                    continue;
-                }
+                $action = ($this->askPlayerAction)();
 
                 if ($action->isHit()) {
                     ($this->playerHitsAction)();
